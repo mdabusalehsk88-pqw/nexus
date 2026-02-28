@@ -1,0 +1,8 @@
+{
+  "name": "Nexus AI Studio",
+  "description": "A world-class multimodal playground powered by Gemini 3 and Veo, featuring advanced chat with search grounding, high-fidelity image generation, and cinematic video synthesis.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
