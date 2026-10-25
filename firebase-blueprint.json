@@ -1,0 +1,450 @@
+{
+  "entities": {
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Registered administrator record for RBAC verification.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "email": { "type": "string", "format": "email", "maxLength": 256 },
+        "role": { "type": "string", "enum": ["SUPER_ADMIN"], "maxLength": 30 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    },
+    "ClassSettings": {
+      "title": "ClassSettings",
+      "description": "Global class statistics and institutional configuration.",
+      "type": "object",
+      "properties": {
+        "className": { "type": "string", "maxLength": 200 },
+        "section": { "type": "string", "maxLength": 100 },
+        "academicYear": { "type": "string", "maxLength": 100 },
+        "totalStudents": { "type": "number" },
+        "boysCount": { "type": "number" },
+        "girlsCount": { "type": "number" },
+        "headTeacher": { "type": "string", "maxLength": 150 },
+        "itOfficer": { "type": "string", "maxLength": 150 },
+        "classLeader": { "type": "string", "maxLength": 150 },
+        "cashier": { "type": "string", "maxLength": 150 },
+        "todayAttendance": { "type": "number" },
+        "todayAttendanceRate": { "type": "number" },
+        "classFundBalance": { "type": "number" },
+        "activeSubjects": { "type": "number" },
+        "classroomNumber": { "type": "string", "maxLength": 100 },
+        "lastUpdatedBy": { "type": "string", "maxLength": 150 },
+        "lastUpdatedAt": { "type": "string", "maxLength": 100 },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "className",
+        "section",
+        "academicYear",
+        "totalStudents",
+        "boysCount",
+        "girlsCount",
+        "headTeacher",
+        "itOfficer",
+        "classLeader",
+        "cashier",
+        "todayAttendance",
+        "todayAttendanceRate",
+        "classFundBalance",
+        "activeSubjects",
+        "classroomNumber",
+        "lastUpdatedBy",
+        "lastUpdatedAt",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ClassMember": {
+      "title": "ClassMember",
+      "description": "Enrolled student or super administrator profile in the class roster.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "maxLength": 150 },
+        "email": { "type": "string", "maxLength": 256 },
+        "admissionNumber": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["SUPER_ADMIN", "STUDENT"], "maxLength": 30 },
+        "roll": { "type": "string", "maxLength": 50 },
+        "phone": { "type": "string", "maxLength": 50 },
+        "photo": { "type": "string", "maxLength": 200000 },
+        "status": { "type": "string", "enum": ["ACTIVE", "SUSPENDED"], "maxLength": 30 },
+        "gender": { "type": "string", "enum": ["Boy", "Girl"], "maxLength": 20 },
+        "attendanceRate": { "type": "number" },
+        "gpa": { "type": "number" },
+        "username": { "type": "string", "maxLength": 100 },
+        "password": { "type": "string", "maxLength": 100 },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "admissionNumber",
+        "role",
+        "roll",
+        "phone",
+        "photo",
+        "status",
+        "gender",
+        "attendanceRate",
+        "gpa",
+        "username",
+        "password",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "AttendanceDay": {
+      "title": "AttendanceDay",
+      "description": "Date-wise attendance register mapping student IDs to PRESENT, ABSENT, or LATE.",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "maxLength": 20, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "records": { "type": "object" },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["date", "records", "ownerId", "createdAt", "updatedAt"]
+    },
+    "ClassNotice": {
+      "title": "ClassNotice",
+      "description": "Official class announcement or urgent notice.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "title": { "type": "string", "maxLength": 300 },
+        "category": { "type": "string", "maxLength": 50 },
+        "noticeType": { "type": "string", "enum": ["URGENT", "EXAM", "FUND", "SCHEDULE", "EVENT", "GENERAL"], "maxLength": 30 },
+        "date": { "type": "string", "maxLength": 50 },
+        "author": { "type": "string", "maxLength": 150 },
+        "content": { "type": "string", "maxLength": 5000 },
+        "priority": { "type": "string", "enum": ["high", "normal"], "maxLength": 20 },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "category", "noticeType", "date", "author", "content", "priority", "ownerId", "createdAt", "updatedAt"]
+    },
+    "ClassRoutineSlot": {
+      "title": "ClassRoutineSlot",
+      "description": "Timetable period slot in the class routine builder.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "day": { "type": "string", "maxLength": 30 },
+        "period": { "type": "number" },
+        "time": { "type": "string", "maxLength": 100 },
+        "subject": { "type": "string", "maxLength": 150 },
+        "teacher": { "type": "string", "maxLength": 150 },
+        "room": { "type": "string", "maxLength": 100 },
+        "type": { "type": "string", "enum": ["LECTURE", "LAB", "BREAK"], "maxLength": 30 },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "day", "period", "time", "subject", "teacher", "room", "type", "ownerId", "createdAt", "updatedAt"]
+    },
+    "FundTransaction": {
+      "title": "FundTransaction",
+      "description": "Class fund income or expense ledger entry.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "title": { "type": "string", "maxLength": 300 },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["INCOME", "EXPENSE"], "maxLength": 20 },
+        "category": { "type": "string", "maxLength": 100 },
+        "date": { "type": "string", "maxLength": 50 },
+        "recordedBy": { "type": "string", "maxLength": 150 },
+        "studentId": { "type": "string", "maxLength": 128 },
+        "studentName": { "type": "string", "maxLength": 150 },
+        "receiptNumber": { "type": "string", "maxLength": 100 },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "amount", "type", "category", "date", "recordedBy", "studentId", "studentName", "receiptNumber", "ownerId", "createdAt", "updatedAt"]
+    },
+    "StudentDue": {
+      "title": "StudentDue",
+      "description": "Assigned student fee or class fund due record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "studentId": { "type": "string", "maxLength": 128 },
+        "studentName": { "type": "string", "maxLength": 150 },
+        "roll": { "type": "string", "maxLength": 50 },
+        "admissionNumber": { "type": "string", "maxLength": 100 },
+        "title": { "type": "string", "maxLength": 300 },
+        "totalAmount": { "type": "number" },
+        "paidAmount": { "type": "number" },
+        "dueDate": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["PAID", "PARTIAL", "PENDING"], "maxLength": 30 },
+        "lastPaymentDate": { "type": "string", "maxLength": 50 },
+        "paymentMethod": { "type": "string", "maxLength": 100 },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "studentId", "studentName", "roll", "admissionNumber", "title", "totalAmount", "paidAmount", "dueDate", "status", "lastPaymentDate", "paymentMethod", "notes", "ownerId", "createdAt", "updatedAt"]
+    },
+    "ClassFile": {
+      "title": "ClassFile",
+      "description": "Uploaded study material or class document metadata.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "maxLength": 300 },
+        "category": { "type": "string", "maxLength": 100 },
+        "subject": { "type": "string", "maxLength": 150 },
+        "size": { "type": "string", "maxLength": 50 },
+        "uploadedAt": { "type": "string", "maxLength": 100 },
+        "uploader": { "type": "string", "maxLength": 150 },
+        "fileType": { "type": "string", "maxLength": 50 },
+        "url": { "type": "string", "maxLength": 500000 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "category", "subject", "size", "uploadedAt", "uploader", "fileType", "url", "description", "ownerId", "createdAt", "updatedAt"]
+    },
+    "StudentGradeCard": {
+      "title": "StudentGradeCard",
+      "description": "17-subject examination grade card matching the Darul Huda / AL-USWAH PDF template.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "studentId": { "type": "string", "maxLength": 128 },
+        "academicYear": { "type": "string", "maxLength": 50 },
+        "issuedDate": { "type": "string", "maxLength": 100 },
+        "examTitle": { "type": "string", "maxLength": 300 },
+        "admissionNo": { "type": "string", "maxLength": 100 },
+        "enrollmentNo": { "type": "string", "maxLength": 100 },
+        "studentName": { "type": "string", "maxLength": 150 },
+        "dateOfBirth": { "type": "string", "maxLength": 50 },
+        "standard": { "type": "string", "maxLength": 100 },
+        "division": { "type": "string", "maxLength": 50 },
+        "photo": { "type": "string", "maxLength": 200000 },
+        "subjects": { "type": "array" },
+        "totalSaScored": { "type": "number" },
+        "totalSaMax": { "type": "number" },
+        "totalFaScored": { "type": "number" },
+        "totalFaMax": { "type": "number" },
+        "grandTotalScored": { "type": "number" },
+        "grandTotalMax": { "type": "number" },
+        "overallPercentage": { "type": "number" },
+        "noOfSubjectsFailed": { "type": "number" },
+        "overallGrade": { "type": "string", "maxLength": 20 },
+        "overallRank": { "type": "number" },
+        "totalRankStudents": { "type": "number" },
+        "performanceLevel": { "type": "string", "maxLength": 20 },
+        "averagePercentage": { "type": "number" },
+        "gpa": { "type": "number" },
+        "classAttendancePresent": { "type": "number" },
+        "classAttendanceTotal": { "type": "number" },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "studentId",
+        "academicYear",
+        "issuedDate",
+        "examTitle",
+        "admissionNo",
+        "enrollmentNo",
+        "studentName",
+        "dateOfBirth",
+        "standard",
+        "division",
+        "photo",
+        "subjects",
+        "totalSaScored",
+        "totalSaMax",
+        "totalFaScored",
+        "totalFaMax",
+        "grandTotalScored",
+        "grandTotalMax",
+        "overallPercentage",
+        "noOfSubjectsFailed",
+        "overallGrade",
+        "overallRank",
+        "totalRankStudents",
+        "performanceLevel",
+        "averagePercentage",
+        "gpa",
+        "classAttendancePresent",
+        "classAttendanceTotal",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "SubjectMarksheet": {
+      "title": "SubjectMarksheet",
+      "description": "Subject-wise evaluation marksheet record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "subject": { "type": "string", "maxLength": 150 },
+        "examTerm": { "type": "string", "maxLength": 200 },
+        "maxMarks": { "type": "number" },
+        "passMarks": { "type": "number" },
+        "examDate": { "type": "string", "maxLength": 50 },
+        "submittedBy": { "type": "string", "maxLength": 150 },
+        "submittedAt": { "type": "string", "maxLength": 100 },
+        "entries": { "type": "array" },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "subject", "examTerm", "maxMarks", "passMarks", "examDate", "submittedBy", "submittedAt", "entries", "ownerId", "createdAt", "updatedAt"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Real-time broadcast or direct message in the class portal.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "conversationId": { "type": "string", "maxLength": 128 },
+        "senderId": { "type": "string", "maxLength": 128 },
+        "senderName": { "type": "string", "maxLength": 150 },
+        "senderRole": { "type": "string", "maxLength": 50 },
+        "senderAvatar": { "type": "string", "maxLength": 200000 },
+        "message": { "type": "string", "maxLength": 5000 },
+        "timestamp": { "type": "string", "maxLength": 100 },
+        "channel": { "type": "string", "maxLength": 100 },
+        "targetAudience": { "type": "string", "enum": ["ALL", "SELECTED_STUDENTS", "GROUP"], "maxLength": 30 },
+        "isAnnouncement": { "type": "boolean" },
+        "ownerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "conversationId", "senderId", "senderName", "senderRole", "senderAvatar", "message", "timestamp", "channel", "targetAudience", "isAnnouncement", "ownerId", "createdAt", "updatedAt"]
+    },
+    "PublicWebsiteConfig": {
+      "title": "PublicWebsiteConfig",
+      "description": "Public union website CMS configuration, pages, leaders, wings, tours, and styling.",
+      "type": "object",
+      "properties": {
+        "unionName": { "type": "string", "maxLength": 200 },
+        "unionTagline": { "type": "string", "maxLength": 300 },
+        "logoText": { "type": "string", "maxLength": 50 },
+        "logoImageUrl": { "type": "string", "maxLength": 200000 },
+        "themePreset": { "type": "string", "maxLength": 50 },
+        "cardBorderRadius": { "type": "string", "maxLength": 50 },
+        "customPages": { "type": "array" },
+        "heroHeading": { "type": "string", "maxLength": 300 },
+        "heroSubheading": { "type": "string", "maxLength": 500 },
+        "heroKicker": { "type": "string", "maxLength": 200 },
+        "heroBgImage": { "type": "string", "maxLength": 200000 },
+        "heroOverlayOpacity": { "type": "number" },
+        "heroPrimaryBtnText": { "type": "string", "maxLength": 100 },
+        "heroSecondaryBtnText": { "type": "string", "maxLength": 100 },
+        "showAboutSection": { "type": "boolean" },
+        "aboutHeading": { "type": "string", "maxLength": 300 },
+        "aboutSubheading": { "type": "string", "maxLength": 500 },
+        "aboutDescription": { "type": "string", "maxLength": 5000 },
+        "aboutMission": { "type": "string", "maxLength": 3000 },
+        "aboutVision": { "type": "string", "maxLength": 3000 },
+        "aboutImage": { "type": "string", "maxLength": 200000 },
+        "aboutStats": { "type": "array" },
+        "showLeadersSection": { "type": "boolean" },
+        "leadersHeading": { "type": "string", "maxLength": 300 },
+        "leadersSubheading": { "type": "string", "maxLength": 500 },
+        "leaders": { "type": "array" },
+        "showWingsSection": { "type": "boolean" },
+        "wingsHeading": { "type": "string", "maxLength": 300 },
+        "wingsSubheading": { "type": "string", "maxLength": 500 },
+        "wings": { "type": "array" },
+        "showToursSection": { "type": "boolean" },
+        "toursHeading": { "type": "string", "maxLength": 300 },
+        "toursSubheading": { "type": "string", "maxLength": 500 },
+        "tourPhotos": { "type": "array" },
+        "showPublicNotices": { "type": "boolean" },
+        "showPublicRoutine": { "type": "boolean" },
+        "showPublicResultsLookup": { "type": "boolean" },
+        "customSections": { "type": "array" },
+        "contactAddress": { "type": "string", "maxLength": 500 },
+        "contactEmail": { "type": "string", "maxLength": 200 },
+        "contactPhone": { "type": "string", "maxLength": 100 },
+        "footerCopyright": { "type": "string", "maxLength": 300 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "unionName",
+        "themePreset",
+        "heroHeading",
+        "contactEmail"
+      ]
+    }
+  },
+  "firestore": {
+    "/website_config/{configId}": {
+      "schema": { "$ref": "#/entities/PublicWebsiteConfig" },
+      "description": "Stores public website builder CMS content, pages, wings, and theme configuration."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Stores verified administrator UIDs for RBAC enforcement."
+    },
+    "/class_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/ClassSettings" },
+      "description": "Stores global class statistics and settings."
+    },
+    "/members/{memberId}": {
+      "schema": { "$ref": "#/entities/ClassMember" },
+      "description": "Stores enrolled student and administrator profiles."
+    },
+    "/attendance/{dateId}": {
+      "schema": { "$ref": "#/entities/AttendanceDay" },
+      "description": "Stores daily attendance records indexed by date."
+    },
+    "/notices/{noticeId}": {
+      "schema": { "$ref": "#/entities/ClassNotice" },
+      "description": "Stores official class notices and announcements."
+    },
+    "/routines/{routineId}": {
+      "schema": { "$ref": "#/entities/ClassRoutineSlot" },
+      "description": "Stores class schedule periods and routine boxes."
+    },
+    "/transactions/{transactionId}": {
+      "schema": { "$ref": "#/entities/FundTransaction" },
+      "description": "Stores class fund income and expense transactions."
+    },
+    "/dues/{dueId}": {
+      "schema": { "$ref": "#/entities/StudentDue" },
+      "description": "Stores assigned student dues and fee payment statuses."
+    },
+    "/files/{fileId}": {
+      "schema": { "$ref": "#/entities/ClassFile" },
+      "description": "Stores uploaded study materials and class files."
+    },
+    "/grade_cards/{cardId}": {
+      "schema": { "$ref": "#/entities/StudentGradeCard" },
+      "description": "Stores 17-subject student grade cards matching the university examination PDF."
+    },
+    "/marksheets/{sheetId}": {
+      "schema": { "$ref": "#/entities/SubjectMarksheet" },
+      "description": "Stores subject-wise marksheet evaluations."
+    },
+    "/chat_messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Stores real-time class broadcast and direct chat messages."
+    }
+  }
+}

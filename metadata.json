@@ -1,8 +1,6 @@
 {
-  "name": "Nexus AI Studio",
-  "description": "A world-class multimodal playground powered by Gemini 3 and Veo, featuring advanced chat with search grounding, high-fidelity image generation, and cinematic video synthesis.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
+  "name": "SmartClass Pro",
+  "description": "Next-Generation Smart Class Management & EdTech Platform featuring AL-USWAH Student Portal, Super Admin Console, Real-Time Messaging, Attendance, and University Examination Grade Cards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
